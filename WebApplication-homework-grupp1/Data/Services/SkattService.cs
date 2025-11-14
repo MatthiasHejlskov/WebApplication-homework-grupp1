@@ -16,9 +16,9 @@ namespace WebApplication_homework_grupp1.Data.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<DateDto>> GetDates()
+        public async Task<List<DateDto>> GetDatesAsync()   // <-- ändrat till Async
         {
-            Console.WriteLine("SkattService.GetDates() körs!");
+            Console.WriteLine("SkattService.GetDatesAsync() körs!");
 
             var url = "https://transportstyrelsen.entryscape.net/rowstore/dataset/42c48f61-274e-422f-afec-c76a6938f8c8?year=2025&_limit=365&_offset=0";
 
