@@ -5,24 +5,31 @@ namespace WebApplication_homework_grupp1.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ISkattService _skattService;
+        private readonly ISkattService _taxService;
 
-        public List<DateDto> Dates { get; set; } = new();
+        public List<DateDto> WithTax { get; set; } = new();
+        public List<DateDto> WithoutTax { get; set; } = new();
+        public List<int> Months { get; set; } = new();
+        public int TotalTax { get; set; } = 0;
 
-        public IndexModel(ISkattService skattService)
+        public IndexModel(ISkattService taxService)
         {
-            _skattService = skattService;
+            _taxService = taxService;
         }
 
         public async Task OnGet()
         {
-            Dates = await _skattService.GetDates();
+            var allDates = await _taxService.GetDates();
 
-            Console.WriteLine("Antal rader mottagna: " + Dates.Count);
-            foreach (var d in Dates)
-            {
-                Console.WriteLine($"{d.Year}-{d.Month}-{d.Day} TaxableDay: {d.TaxableDay}");
-            }
+            var filterService = new DateFilterService();
+            (WithTax, WithoutTax) = filterService.SplitByTax(allDates);
+
+            var monthService = new MonthService();
+            Months = monthService.GetUniqueMonths(allDates);
+
+            TotalTax = WithTax.Sum(d => d.TaxableDay);
         }
     }
 }
+
+
