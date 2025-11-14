@@ -1,4 +1,4 @@
-﻿using WebApplication_homework_grupp1.Dates;
+using WebApplication_homework_grupp1.Dates;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Linq;
@@ -12,15 +12,17 @@ namespace WebApplication_homework_grupp1.Data.Services
         private readonly HttpClient _httpClient;
 
         public SkattService(HttpClient httpClient)
-        { 
+        {
             _httpClient = httpClient;
         }
 
-        public async Task<List<DateDto>> GetDatesAsync()
+        public async Task<List<DateDto>> GetDates()
         {
-            Console.WriteLine("SkattService.GetDatesAsync() körs!");
+            Console.WriteLine("SkattService.GetDates() körs!");
+
             var url = "https://transportstyrelsen.entryscape.net/rowstore/dataset/42c48f61-274e-422f-afec-c76a6938f8c8?year=2025&_limit=365&_offset=0";
 
+            // Hämta API-data som DateResponse
             var response = await _httpClient.GetFromJsonAsync<DateResponse>(url);
 
             if (response?.Results == null)
@@ -31,15 +33,15 @@ namespace WebApplication_homework_grupp1.Data.Services
 
             Console.WriteLine($"Antal rader i API: {response.Results.Count}");
 
+            // Mappa API-data → DateDto
             return response.Results
                            .Select(item => new DateDto
                            {
-                               Month = int.Parse(item.Month),
                                Year = item.Year,
-                               TaxableDay = int.Parse(item.TaxableDay),
+                               Month = item.Month,         // string → string (OK)
                                Day = item.Day,
+                               TaxableDay = item.TaxableDay // string → string (OK)
                            }).ToList();
         }
     }
 }
-
