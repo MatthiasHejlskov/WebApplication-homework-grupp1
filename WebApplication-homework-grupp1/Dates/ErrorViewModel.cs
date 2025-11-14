@@ -1,4 +1,4 @@
-namespace WebApplication_homework_grupp1.Data.Models
+namespace WebApplication_homework_grupp1.Dates
 {
     public class ErrorViewModel
     {
@@ -6,3 +6,4 @@ namespace WebApplication_homework_grupp1.Data.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+ 
