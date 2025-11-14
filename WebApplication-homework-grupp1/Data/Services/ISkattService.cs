@@ -9,4 +9,3 @@ namespace WebApplication_homework_grupp1.Data.Services
         Task<List<DateDto>> GetDates();
     }
 }
-
