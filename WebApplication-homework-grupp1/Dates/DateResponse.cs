@@ -9,3 +9,4 @@ namespace WebApplication_homework_grupp1.Dates
         public List<DateDto> Results { get; set; } = new();
     }
 }
+ 
