@@ -1,10 +1,20 @@
-namespace WebApplication_homework_grupp1.Data.Models
+using System.Text.Json.Serialization;
+
+namespace WebApplication_homework_grupp1.Dates
 {
     public class DateDto
     {
+        [JsonPropertyName("year")]
         public int Year { get; set; }
-        public int Month { get; set; }
+
+        [JsonPropertyName("month")]
+        public string Month { get; set; } = string.Empty;
+
+        [JsonPropertyName("day")]
         public int Day { get; set; }
-        public int TaxableDay { get; set; } // 0 = no tax, >0 = taxed
+
+        [JsonPropertyName("taxable day")]
+        public string TaxableDay { get; set; } = string.Empty;
     }
 }
+
