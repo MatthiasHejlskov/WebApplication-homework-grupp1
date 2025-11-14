@@ -22,7 +22,6 @@ namespace WebApplication_homework_grupp1.Data.Services
 
             var url = "https://transportstyrelsen.entryscape.net/rowstore/dataset/42c48f61-274e-422f-afec-c76a6938f8c8?year=2025&_limit=365&_offset=0";
 
-            // Hämta API-data som DateResponse
             var response = await _httpClient.GetFromJsonAsync<DateResponse>(url);
 
             if (response?.Results == null)
@@ -33,14 +32,13 @@ namespace WebApplication_homework_grupp1.Data.Services
 
             Console.WriteLine($"Antal rader i API: {response.Results.Count}");
 
-            // Mappa API-data → DateDto
             return response.Results
                            .Select(item => new DateDto
                            {
                                Year = item.Year,
-                               Month = item.Month,         // string → string (OK)
+                               Month = item.Month,
                                Day = item.Day,
-                               TaxableDay = item.TaxableDay // string → string (OK)
+                               TaxableDay = item.TaxableDay
                            }).ToList();
         }
     }
