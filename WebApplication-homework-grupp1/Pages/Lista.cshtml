@@ -1,0 +1,11 @@
+﻿@page
+@model WebApplication_homework_grupp1.Pages.ListaModel
+
+<h1>Skattedagar</h1>
+
+<ul>
+    @foreach (var item in Model.Dates)
+    {
+        <li>@item.TaxableDay</li>
+    }
+</ul>

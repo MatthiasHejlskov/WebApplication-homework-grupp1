@@ -1,9 +1,16 @@
-﻿namespace WebApplication_homework_grupp1.Dates
+﻿using System.Text.Json.Serialization;
+
+namespace WebApplication_homework_grupp1.Dates
 {
     public class DateResponse
-    {   //tar datan från API och lägger det i en lista.
+    {
+        [JsonPropertyName("count")]
         public int Count { get; set; }
+
+        [JsonPropertyName("message")]
         public string Message { get; set; } = null!;
+
+        [JsonPropertyName("results")]
         public List<DateDto>? Results { get; set; }
     }
 }
