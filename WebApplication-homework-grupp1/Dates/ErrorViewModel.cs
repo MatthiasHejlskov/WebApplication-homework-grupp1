@@ -1,6 +1,6 @@
 ﻿namespace WebApplication_homework_grupp1.Dates
 {
-    public class ErrorViewDate
+    public class ErrorViewModel
     {
         public string? RequestId { get; set; }
         

@@ -5,6 +5,9 @@
 }
 <h1>@ViewData["Test page"]</h1>
 
-<p>
-	this is a testpage to test pages
-</p>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Year</li>
+    }
+</ul>
