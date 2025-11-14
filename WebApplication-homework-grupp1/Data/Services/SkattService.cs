@@ -12,8 +12,10 @@ namespace WebApplication_homework_grupp1.Data.Services
         public async Task<List<DateDto>> GetDates()
         {
             Console.WriteLine("SkattService.GetDates() körs!");
-            var response = await _httpClient.GetFromJsonAsync<DateResponse>("https://transportstyrelsen.entryscape.net/rowstore/dataset/42c48f61-274e-422f-afec-c76a6938f8c8?year=2025&_limit=365&_offset=0"); //vi ber om data för hela 2025
+            var url =
+    "https://transportstyrelsen.entryscape.net/rowstore/dataset/42c48f61-274e-422f-afec-c76a6938f8c8?year=2026&_limit=365&_offset=0";
 
+            var response = await _httpClient.GetFromJsonAsync<DateResponse>(url);
             if (response == null)
             {
                 Console.WriteLine("API svarade null");
