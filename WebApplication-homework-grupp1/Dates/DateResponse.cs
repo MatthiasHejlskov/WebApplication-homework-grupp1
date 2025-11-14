@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace WebApplication_homework_grupp1.Data.Models
+namespace WebApplication_homework_grupp1.Dates
 {
     public class DateResponse
     {
-        public List<DateDto> Results { get; set; }
+        [JsonPropertyName("results")]
+        public List<DateDto> Results { get; set; } = new();
     }
 }
