@@ -1,13 +1,9 @@
-﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
-namespace WebApplication_homework_grupp1.Dates
+namespace WebApplication_homework_grupp1.Data.Models
 {
     public class DateResponse
     {
-        [JsonPropertyName("resultCount")]
-        public int Count { get; set; }
-
-        [JsonPropertyName("results")]
-        public List<DateDto>? Results { get; set; }
+        public List<DateDto> Results { get; set; }
     }
 }
