@@ -1,19 +1,10 @@
-﻿using System.Text.Json.Serialization;
-
-namespace WebApplication_homework_grupp1.Dates
+namespace WebApplication_homework_grupp1.Data.Models
 {
-    public class DateDto             //Date "data transfer object" 
+    public class DateDto
     {
-        [JsonPropertyName("year")]
         public int Year { get; set; }
-
-        [JsonPropertyName("month")]
-        public string Month { get; set; } = null!;   //denna gör att det blir null om det inte finns nån data, annars ger kompilatorn felmeddelande.
-
-        [JsonPropertyName("day")]
+        public int Month { get; set; }
         public int Day { get; set; }
-
-        [JsonPropertyName("taxable day")]
-        public string TaxableDay { get; set; } = null!;
+        public int TaxableDay { get; set; } // 0 = no tax, >0 = taxed
     }
 }
