@@ -22,9 +22,12 @@ namespace WebApplication_homework_grupp1.Data.Services
                 return new List<DateDto>();
             }
 
-            if (response?.Results == null)                    //om response är null skapar den en tom lista
-                Console.WriteLine("API innehåller inga Results");
-            return new List<DateDto>();
+           if (response?.Results == null)
+           {
+    Console.WriteLine("API innehåller inga Results");
+    return new List<DateDto>();
+           }
+
 
             Console.WriteLine($"Antal rader i API: {response.Results.Count}");
             return response.Results
