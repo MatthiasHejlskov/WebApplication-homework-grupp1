@@ -1,43 +1,97 @@
 @page
 @model WebApplication_homework_grupp1.Pages.IndexModel
 @{
-    ViewData["Title"] = "Car Tax Data";
+    ViewData["Title"] = "Vehicle Tax Data";
 }
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="container mt-5">
-    <h2 class="mb-4">Car Tax Information</h2>
+    <h2 class="mb-4">Vehicle Tax Data</h2>
 
-    @if (Model.Dates != null && Model.Dates.Any())
-    {
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Year</th>
-                    <th>Month</th>
-                    <th>Day</th>
-                    <th>Taxable Day</th>
+    <label for="monthSelect">Select Month:</label>
+    <select id="monthSelect" class="form-select mb-3" onchange="filterByMonth()">
+        <option value="0">All months</option>
+        @foreach (var m in Model.Months)
+        {
+            <option value="@m">@m</option>
+        }
+    </select>
+
+    <div class="alert alert-info">
+        Total taxable days: <span id="totalTax">@Model.TotalTax</span>
+    </div>
+
+    <h4>Dates with Tax</h4>
+    <table class="table table-striped table-bordered" id="withTaxTable">
+        <thead class="table-dark">
+            <tr>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Day</th>
+                <th>Taxable Day</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model.WithTax)
+            {
+                <tr data-month="@d.Month">
+                    <td>@d.Year</td>
+                    <td>@d.Month</td>
+                    <td>@d.Day</td>
+                    <td>@d.TaxableDay</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var d in Model.Dates)
-                {
-                    <tr>
-                        <td>@d.Year</td>
-                        <td>@d.Month</td>
-                        <td>@d.Day</td>
-                        <td>@d.TaxableDay</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <div class="alert alert-warning">
-            No data found from the API.
-        </div>
-    }
+            }
+        </tbody>
+    </table>
+
+    <h4>Dates without Tax</h4>
+    <table class="table table-striped table-bordered" id="withoutTaxTable">
+        <thead class="table-dark">
+            <tr>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Day</th>
+                <th>Taxable Day</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model.WithoutTax)
+            {
+                <tr data-month="@d.Month">
+                    <td>@d.Year</td>
+                    <td>@d.Month</td>
+                    <td>@d.Day</td>
+                    <td>@d.TaxableDay</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
+<script>
+    function filterByMonth() {
+        var select = document.getElementById("monthSelect");
+        var month = parseInt(select.value);
+
+        var tables = ["withTaxTable", "withoutTaxTable"];
+        var total = 0;
+
+        tables.forEach(function (id) {
+            var rows = document.getElementById(id).getElementsByTagName("tr");
+            for (var i = 1; i < rows.length; i++) {
+                if (month === 0) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = rows[i].getAttribute("data-month") == month ? "" : "none";
+                }
+
+                if (id === "withTaxTable" && rows[i].style.display !== "none") {
+                    total += parseInt(rows[i].cells[3].innerText);
+                }
+            }
+        });
+
+        document.getElementById("totalTax").innerText = total;
+    }
+</script>
