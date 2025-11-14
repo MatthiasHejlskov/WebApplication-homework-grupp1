@@ -1,20 +1,28 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApplication_homework_grupp1.Data.Services;
 
 namespace WebApplication_homework_grupp1.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ISkattService _skattService;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public List<DateDto> Dates { get; set; } = new();
+
+        public IndexModel(ISkattService skattService)
         {
-            _logger = logger;
+            _skattService = skattService;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
+            Dates = await _skattService.GetDates();
 
+            Console.WriteLine("Antal rader mottagna: " + Dates.Count);
+            foreach (var d in Dates)
+            {
+                Console.WriteLine($"{d.Year}-{d.Month}-{d.Day} TaxableDay: {d.TaxableDay}");
+            }
         }
     }
 }
