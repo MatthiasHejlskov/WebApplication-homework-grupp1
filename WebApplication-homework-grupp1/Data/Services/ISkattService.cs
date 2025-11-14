@@ -1,11 +1,12 @@
-﻿using WebApplication_homework_grupp1.Dates;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebApplication_homework_grupp1.Data.Models;
+
 namespace WebApplication_homework_grupp1.Data.Services
-
 {
-    public interface ISkattService      //interface som tvingar klasser att skapa en lista med datumen
+    public interface ISkattService
     {
-        Task<List<DateDto>> GetDates();
-
-
+        Task<List<DateDto>> GetDatesAsync();
     }
 }
+
