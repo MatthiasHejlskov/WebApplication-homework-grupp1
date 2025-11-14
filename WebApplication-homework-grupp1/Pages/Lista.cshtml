@@ -3,9 +3,22 @@
 
 <h1>Skattedagar</h1>
 
-<ul>
-    @foreach (var item in Model.Dates)
-    {
-        <li>@item.TaxableDay</li>
-    }
-</ul>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Månad</th>
+            <th>Dag</th>
+            <th>Trängselskatt?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Dates)
+        {
+            <tr>
+                <td>@item.Month</td>
+                <td>@item.Day</td>
+                <td>@item.TaxableDay</td>
+            </tr>
+        }
+    </tbody>
+</table>
