@@ -13,7 +13,7 @@ namespace WebApplication_homework_grupp1.Dates
         [JsonPropertyName("day")]
         public int Day { get; set; }
 
-        [JsonPropertyName("taxable_day")]
+        [JsonPropertyName("taxable day")]
         public string TaxableDay { get; set; } = null!;
     }
 }
