@@ -1,23 +1,59 @@
-﻿@page
+@page
 @model WebApplication_homework_grupp1.Pages.ListaModel
+@{
+    ViewData["Title"] = "Skattedagar";
+}
 
 <h1>Skattedagar</h1>
 
+<form method="get">
+    <label for="monthSelect">Välj månad:</label>
+    <select id="monthSelect" name="SelectedMonth" asp-for="SelectedMonth" onchange="this.form.submit()">
+        <option value="">-- Alla månader --</option>
+        @foreach (var month in Model.Months)
+        {
+            <option value="@month" @(month == Model.SelectedMonth ? "selected" : "")>@month</option>
+        }
+    </select>
+</form>
+
+<h2>Datum utan trängselskatt</h2>
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>År</th>
             <th>Månad</th>
             <th>Dag</th>
-            <th>Trängselskatt?</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Dates)
+        @foreach (var d in Model.NoTaxDates)
         {
             <tr>
-                <td>@item.Month</td>
-                <td>@item.Day</td>
-                <td>@item.TaxableDay</td>
+                <td>@d.Year</td>
+                <td>@d.Month</td>
+                <td>@d.Day</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Datum med trängselskatt</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>År</th>
+            <th>Månad</th>
+            <th>Dag</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model.TaxedDates)
+        {
+            <tr>
+                <td>@d.Year</td>
+                <td>@d.Month</td>
+                <td>@d.Day</td>
             </tr>
         }
     </tbody>
