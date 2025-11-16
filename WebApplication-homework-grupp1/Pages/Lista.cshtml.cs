@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApplication_homework_grupp1.Data.Services;
 using WebApplication_homework_grupp1.Dates;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApplication_homework_grupp1.Pages
 {
@@ -17,34 +13,13 @@ namespace WebApplication_homework_grupp1.Pages
             _skattService = skattService;
         }
 
-        public List<DateDto> TaxedDates { get; set; } = new();
-        public List<DateDto> NoTaxDates { get; set; } = new();
-        public List<string> Months { get; set; } = new();
+        public IEnumerable<DateDto> Dates { get; set; } = Enumerable.Empty<DateDto>();
 
-        [BindProperty(SupportsGet = true)]
-        public string SelectedMonth { get; set; } = "";
-
-        public async Task OnGetAsync()
+        public async Task OnGet()
         {
-            var dates = await _skattService.GetDatesAsync();
-            var processor = new DateProcessor(dates);
-
-            Months = processor.GetUniqueMonths();
-
-            if (!string.IsNullOrEmpty(SelectedMonth))
-            {
-                TaxedDates = processor.GetDatesByMonth(SelectedMonth)
-                                      .Where(d => d.TaxableDay != "0" && d.TaxableDay.ToLower() != "no")
-                                      .ToList();
-                NoTaxDates = processor.GetDatesByMonth(SelectedMonth)
-                                      .Where(d => d.TaxableDay == "0" || d.TaxableDay.ToLower() == "no")
-                                      .ToList();
-            }
-            else
-            {
-                TaxedDates = processor.GetTaxedDates();
-                NoTaxDates = processor.GetNoTaxDates();
-            }
+            Console.WriteLine("ListaModel.OnGet() körs!");
+            Dates = await _skattService.GetDatesAsync();
+            Console.WriteLine($"ListaModel mottog {Dates.Count()} rader.");
         }
     }
 }
