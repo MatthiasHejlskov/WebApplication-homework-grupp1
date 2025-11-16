@@ -21,7 +21,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>År</th>
             <th>Månad</th>
             <th>Dag</th>
         </tr>
@@ -30,7 +29,6 @@
         @foreach (var d in Model.NoTaxDates)
         {
             <tr>
-                <td>@d.Year</td>
                 <td>@d.Month</td>
                 <td>@d.Day</td>
             </tr>
@@ -42,7 +40,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>År</th>
             <th>Månad</th>
             <th>Dag</th>
         </tr>
@@ -51,7 +48,6 @@
         @foreach (var d in Model.TaxedDates)
         {
             <tr>
-                <td>@d.Year</td>
                 <td>@d.Month</td>
                 <td>@d.Day</td>
             </tr>
