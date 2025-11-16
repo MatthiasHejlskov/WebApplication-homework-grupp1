@@ -17,9 +17,9 @@ namespace WebApplication_homework_grupp1.Pages
 
         public async Task OnGet()
         {
-            Console.WriteLine("ListaModel.OnGet() körs!");
+
             Dates = await _skattService.GetDatesAsync();
-            Console.WriteLine($"ListaModel mottog {Dates.Count()} rader.");
+            
         }
     }
 }
