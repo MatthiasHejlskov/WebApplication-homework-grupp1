@@ -9,5 +9,6 @@ namespace WebApplication_homework_grupp1.Data.Services
         Task<List<DateDto>> GetDatesAsync();
         Task<List<DateDto>> GetTaxableDates();
         Task<List<DateDto>> GetNonTaxableDates();
+        Task<List<DateDto>> GetDatesByMonth(string month);
     }
 }
