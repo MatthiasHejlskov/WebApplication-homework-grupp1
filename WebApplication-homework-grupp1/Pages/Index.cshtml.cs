@@ -19,7 +19,7 @@ namespace WebApplication_homework_grupp1.Pages
 
         public async Task OnGet()
         {
-            var allDates = await _taxService.GetDates();
+            var allDates = await _taxService.GetDatesAsync();
 
             var filterService = new DateFilterService();
             (WithTax, WithoutTax) = filterService.SplitByTax(allDates);
