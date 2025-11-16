@@ -26,7 +26,7 @@ namespace WebApplication_homework_grupp1.Pages
 
         public async Task OnGetAsync()
         {
-            var dates = await _skattService.GetDates();
+            var dates = await _skattService.GetDatesAsync();
             var processor = new DateProcessor(dates);
 
             Months = processor.GetUniqueMonths();
