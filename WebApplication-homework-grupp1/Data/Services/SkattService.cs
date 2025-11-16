@@ -35,7 +35,6 @@ namespace WebApplication_homework_grupp1.Data.Services
             return response.Results
                            .Select(item => new DateDto
                            {
-                               Year = item.Year,
                                Month = item.Month,
                                Day = item.Day,
                                TaxableDay = item.TaxableDay
