@@ -4,8 +4,7 @@ namespace WebApplication_homework_grupp1.Dates
 {
     public class DateDto
     {
-        [JsonPropertyName("year")]
-        public int Year { get; set; }
+      
 
         [JsonPropertyName("month")]
         public string Month { get; set; } = string.Empty;
