@@ -1,9 +1,10 @@
-using WebApplication_homework_grupp1.Dates;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebApplication_homework_grupp1.Dates;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApplication_homework_grupp1.Data.Services
 {
@@ -56,5 +57,16 @@ namespace WebApplication_homework_grupp1.Data.Services
                 .Where(d => d.TaxableDay?.Equals("No") == true)
                 .ToList();
         }
+        // Filtrerar datum på vald månad
+        public async Task<List<DateDto>> GetDatesByMonth(string month)
+        {
+            var allDates = await GetDatesAsync();
+            return allDates
+                .Where(d => d.Month == month)
+                .ToList();
+        }
     }
 }
+        
+    
+
