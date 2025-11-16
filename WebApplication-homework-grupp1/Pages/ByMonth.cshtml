@@ -1,0 +1,49 @@
+﻿@page
+@model DatesByMonthModel
+
+<h1>Visa datum per månad</h1>
+
+<form method="get">
+    <label for="month">Välj månad:</label>
+    <select id="month" name="month">
+        <option value="">-- Välj --</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+    </select>
+
+    <button type="submit">Visa</button>
+</form>
+@if (Model.Dates != null && Model.Dates.Count > 0)
+{
+    <h2>Resultat för @Model.SelectedMonth</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Day</th>
+                <th>Taxable</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var date in Model.Dates)
+            {
+                <tr>
+                    <td>@date.Month</td>
+                    <td>@date.Day</td>
+                    <td>@date.TaxableDay</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
