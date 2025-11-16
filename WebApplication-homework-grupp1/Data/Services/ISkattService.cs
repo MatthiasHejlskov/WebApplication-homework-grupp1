@@ -7,5 +7,7 @@ namespace WebApplication_homework_grupp1.Data.Services
     public interface ISkattService
     {
         Task<List<DateDto>> GetDatesAsync();
+        Task<List<DateDto>> GetTaxableDates();
+        Task<List<DateDto>> GetNonTaxableDates();
     }
 }

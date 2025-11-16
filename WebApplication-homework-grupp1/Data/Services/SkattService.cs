@@ -40,5 +40,21 @@ namespace WebApplication_homework_grupp1.Data.Services
                                TaxableDay = item.TaxableDay
                            }).ToList();
         }
+        public async Task<List<DateDto>> GetTaxableDates()
+        {
+            var allDates = await GetDatesAsync();
+
+            return allDates
+                .Where(d => d.TaxableDay?.Equals("Yes") == true)
+                .ToList();
+        }
+        public async Task<List<DateDto>> GetNonTaxableDates()
+        {
+            var allDates = await GetDatesAsync();
+
+            return allDates
+                .Where(d => d.TaxableDay?.Equals("No") == true)
+                .ToList();
+        }
     }
 }
