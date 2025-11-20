@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace WebApplication_homework_grupp1.Dates
 {
-    public class DateDto
+    public class DateDto            //Hanterar data variablerna från APIn.
     {
       
 

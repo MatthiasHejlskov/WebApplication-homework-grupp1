@@ -17,7 +17,7 @@ namespace WebApplication_homework_grupp1.Data.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<DateDto>> GetDatesAsync()   // <-- ändrat till Async
+        public async Task<List<DateDto>> GetDatesAsync()   //hämtar data från API och skapar en lista med alla datum
         {
            
 
@@ -25,7 +25,7 @@ namespace WebApplication_homework_grupp1.Data.Services
 
             var response = await _httpClient.GetFromJsonAsync<DateResponse>(url);
 
-            if (response?.Results == null)
+            if (response?.Results == null)              //om API inte svarar, eller svarar med 0 rader skapas en tom lista
             {
                 
                 return new List<DateDto>();
@@ -33,7 +33,7 @@ namespace WebApplication_homework_grupp1.Data.Services
 
             
 
-            return response.Results
+            return response.Results                     //om API svarar med data som väntat skapas en lista med datum och de variabler vi vill ha
                            .Select(item => new DateDto
                            {
                                Month = item.Month,
@@ -41,27 +41,27 @@ namespace WebApplication_homework_grupp1.Data.Services
                                TaxableDay = item.TaxableDay
                            }).ToList();
         }
-        public async Task<List<DateDto>> GetTaxableDates()
+        public async Task<List<DateDto>> GetTaxableDates()      //skapar en lista med datum som har trängselskatt
         {
-            var allDates = await GetDatesAsync();
+            var allDates = await GetDatesAsync();               //hämtar listan med alla datum från GetDatesAsync
 
-            return allDates
+            return allDates                                     //returnerar ny lista där alla datum med "Yes" i taxableDay läggs in
                 .Where(d => d.TaxableDay?.Equals("Yes") == true)
                 .ToList();
         }
-        public async Task<List<DateDto>> GetNonTaxableDates()
+        public async Task<List<DateDto>> GetNonTaxableDates()   //skapar en lista med datum utan trängselskatt
         {
-            var allDates = await GetDatesAsync();
+            var allDates = await GetDatesAsync();                //hämtar listan med alla datum från GetDatesAsync
 
-            return allDates
+            return allDates                                     //returnerar ny lista där alla datum med "No" i taxableDay läggs in
                 .Where(d => d.TaxableDay?.Equals("No") == true)
                 .ToList();
         }
-        // Filtrerar datum på vald månad
-        public async Task<List<DateDto>> GetDatesByMonth(string month)
+        
+        public async Task<List<DateDto>> GetDatesByMonth(string month)  // Filtrerar datum på vald månad
         {
-            var allDates = await GetDatesAsync();
-            return allDates
+            var allDates = await GetDatesAsync();               //hämtar listan med alla datum från GetDatesAsync
+            return allDates                                     //returnerar ny lista där alla datum med den efterfrågade månaden i month läggs in
                 .Where(d => d.Month == month)
                 .ToList();
         }
